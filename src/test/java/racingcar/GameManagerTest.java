@@ -1,21 +1,35 @@
 package racingcar;
 
+import static camp.nextstep.edu.missionutils.Console.close;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import racingcar.validator.InputValidator;
 
 class GameManagerTest {
     static GameManager gameManager = new GameManager();
 
+    private static InputStream generateUserInput(String input) {
+        return new ByteArrayInputStream(input.getBytes());
+    }
+
+    @AfterEach
+    void tearDown() {
+        close();
+    }
+
     @Test
     void 자동차_이름_입력() {
         String testString = "car1,car2,car3";
         String[] resultString = {"car1", "car2", "car3"};
+        System.setIn(generateUserInput(testString));
 
-        List<Car> cars = gameManager.setParticipateCars(testString);
+        List<Car> cars = gameManager.setParticipateCars();
 
         assertThat(cars).hasSize(resultString.length);
         for (int i = 0; i < cars.size(); i++) {
@@ -26,8 +40,9 @@ class GameManagerTest {
     @Test
     void 중복된_이름_입력() {
         String testString = "car1,car2,car1";
+        System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+        assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.DUPLICATE_CAR_NAME_MESSAGE);
     }
@@ -35,8 +50,9 @@ class GameManagerTest {
     @Test
     void 이름_허용_길이_초과() {
         String testString = "car1,car22,car333";
+        System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+        assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
     }
@@ -44,8 +60,9 @@ class GameManagerTest {
     @Test
     void 비어있는_이름_입력() {
         String testString = ",car1,car2";
+        System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+        assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
     }
@@ -53,8 +70,9 @@ class GameManagerTest {
     @Test
     void 이름_공백만_입력() {
         String testString = "car1,  ,car2";
+        System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+        assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
     }
