@@ -21,4 +21,20 @@ class InputValidatorTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
     }
+
+    @Test
+    void 이름_비어있는지_확인() {
+        String[] testCarNames = {"", "car1", "car2"};
+        assertThatThrownBy(() -> InputValidator.userInputValidate(testCarNames))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
+    }
+
+    @Test
+    void 이름_공백인지_확인() {
+        String[] testCarNames = {" ", "car1", "car2"};
+        assertThatThrownBy(() -> InputValidator.userInputValidate(testCarNames))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
+    }
 }

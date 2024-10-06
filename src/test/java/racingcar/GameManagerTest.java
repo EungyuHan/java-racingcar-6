@@ -3,7 +3,6 @@ package racingcar;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import racingcar.validator.InputValidator;
@@ -15,8 +14,6 @@ class GameManagerTest {
     void 자동차_이름_입력() {
         String testString = "car1,car2,car3";
         String[] resultString = {"car1", "car2", "car3"};
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(testString.getBytes());
-        System.setIn(inputStream);
 
         List<Car> cars = gameManager.setParticipateCars(testString);
 
@@ -42,5 +39,23 @@ class GameManagerTest {
         assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
+    }
+
+    @Test
+    void 비어있는_이름_입력() {
+        String testString = ",car1,car2";
+
+        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
+    }
+
+    @Test
+    void 이름_공백만_입력() {
+        String testString = "car1,  ,car2";
+
+        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
     }
 }
