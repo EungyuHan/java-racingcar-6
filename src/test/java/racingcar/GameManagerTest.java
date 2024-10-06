@@ -20,7 +20,7 @@ class GameManagerTest {
 
         List<Car> cars = gameManager.setParticipateCars();
 
-        assertThat(cars).hasSize(3);
+        assertThat(cars).hasSize(resultString.length);
         for (int i = 0; i < cars.size(); i++) {
             assertThat(cars.get(i).getCarName()).isEqualTo(resultString[i]);
         }
@@ -35,5 +35,16 @@ class GameManagerTest {
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.DUPLICATE_CAR_NAME_MESSAGE);
+    }
+
+    @Test
+    void 이름_허용_길이_초과() {
+        String testString = "car1,car22,car333";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(testString.getBytes());
+        System.setIn(inputStream);
+
+        assertThatThrownBy(() -> gameManager.setParticipateCars())
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
     }
 }

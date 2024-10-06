@@ -12,7 +12,8 @@ public class GameManager {
     public List<Car> setParticipateCars() {
         String participateCarString = readLine();
         String[] participateCarNameList = participateCarString.split(CAR_NAME_SPLIT_STANDARD);
-        InputValidator.checkDuplicateCarName(participateCarNameList);
+        InputValidator.userInputValidate(participateCarNameList);
+
         List<Car> carList = new ArrayList<>();
         for (String s : participateCarNameList) {
             carList.add(new Car(s));
