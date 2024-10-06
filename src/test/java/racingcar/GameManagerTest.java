@@ -76,4 +76,14 @@ class GameManagerTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
     }
+
+    @Test
+    void 시도횟수_입력() {
+        String testString = "1";
+        int expected = Integer.parseInt(testString);
+        System.setIn(generateUserInput(testString));
+
+        int attemptNumber = gameManager.setAttemptNumber();
+        assertThat(attemptNumber).isEqualTo(expected);
+    }
 }

@@ -20,4 +20,9 @@ public class GameManager {
         }
         return carList;
     }
+
+    public int setAttemptNumber() {
+        String attemptsNumberString = readLine();
+        return Integer.parseInt(attemptsNumberString);
+    }
 }
