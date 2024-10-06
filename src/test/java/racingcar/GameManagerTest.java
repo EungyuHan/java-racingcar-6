@@ -18,7 +18,7 @@ class GameManagerTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(testString.getBytes());
         System.setIn(inputStream);
 
-        List<Car> cars = gameManager.setParticipateCars();
+        List<Car> cars = gameManager.setParticipateCars(testString);
 
         assertThat(cars).hasSize(resultString.length);
         for (int i = 0; i < cars.size(); i++) {
@@ -29,10 +29,8 @@ class GameManagerTest {
     @Test
     void 중복된_이름_입력() {
         String testString = "car1,car2,car1";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(testString.getBytes());
-        System.setIn(inputStream);
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.DUPLICATE_CAR_NAME_MESSAGE);
     }
@@ -40,10 +38,8 @@ class GameManagerTest {
     @Test
     void 이름_허용_길이_초과() {
         String testString = "car1,car22,car333";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(testString.getBytes());
-        System.setIn(inputStream);
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(() -> gameManager.setParticipateCars(testString))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
     }
