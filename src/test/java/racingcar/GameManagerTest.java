@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 class GameManagerTest {
@@ -85,5 +86,15 @@ class GameManagerTest {
 
         int attemptNumber = gameManager.setAttemptNumber();
         assertThat(attemptNumber).isEqualTo(expected);
+    }
+
+    @Test
+    void 음수_시도횟수_입력() {
+        String testString = "-1";
+        System.setIn(generateUserInput(testString));
+
+        assertThatThrownBy(() -> gameManager.setAttemptNumber())
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(AttemptInputValidator.NEGATIVE_ATTEMPT_MESSAGE);
     }
 }

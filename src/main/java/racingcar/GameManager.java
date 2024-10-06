@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.ArrayList;
 import java.util.List;
+import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 public class GameManager {
@@ -23,6 +24,7 @@ public class GameManager {
 
     public int setAttemptNumber() {
         String attemptsNumberString = readLine();
+        AttemptInputValidator.attemptInputValidate(attemptsNumberString);
         return Integer.parseInt(attemptsNumberString);
     }
 }
