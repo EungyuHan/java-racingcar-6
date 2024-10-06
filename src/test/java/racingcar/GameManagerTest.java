@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import racingcar.validator.InputValidator;
+import racingcar.validator.CarInputValidator;
 
 class GameManagerTest {
     static GameManager gameManager = new GameManager();
@@ -44,7 +44,7 @@ class GameManagerTest {
 
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InputValidator.DUPLICATE_CAR_NAME_MESSAGE);
+                .hasMessage(CarInputValidator.DUPLICATE_CAR_NAME_MESSAGE);
     }
 
     @Test
@@ -54,7 +54,7 @@ class GameManagerTest {
 
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InputValidator.LENGTH_EXCEED_MESSAGE);
+                .hasMessage(CarInputValidator.LENGTH_EXCEED_MESSAGE);
     }
 
     @Test
@@ -64,7 +64,7 @@ class GameManagerTest {
 
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
+                .hasMessage(CarInputValidator.EMPTY_NAME_MESSAGE);
     }
 
     @Test
@@ -74,7 +74,7 @@ class GameManagerTest {
 
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InputValidator.EMPTY_NAME_MESSAGE);
+                .hasMessage(CarInputValidator.EMPTY_NAME_MESSAGE);
     }
 
     @Test
