@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import racingcar.validator.InputValidator;
 
 class GameManagerTest {
     static GameManager gameManager = new GameManager();
@@ -33,6 +34,6 @@ class GameManagerTest {
 
         assertThatThrownBy(() -> gameManager.setParticipateCars())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage("같은 이름을 가진 자동차가 있습니다.");
+                .hasMessage(InputValidator.DUPLICATE_CAR_NAME_MESSAGE);
     }
 }
