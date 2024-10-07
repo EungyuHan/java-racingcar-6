@@ -8,6 +8,7 @@ import racingcar.entity.Car;
 import racingcar.util.RandomNumberGenerator;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
+import racingcar.view.RacingView;
 
 public class GameManager {
     private static final String CAR_NAME_SPLIT_STANDARD = ",";
@@ -30,11 +31,9 @@ public class GameManager {
         return Integer.parseInt(attemptsNumberString);
     }
 
-    public void attemptMoveCars(List<Car> cars) {
-        for (Car car : cars) {
-            int randomNumber = RandomNumberGenerator.randomNumberGenerate();
-            car.attemptMove(randomNumber);
-        }
+    public void attemptMoveCars(Car car) {
+        int randomNumber = RandomNumberGenerator.randomNumberGenerate();
+        car.attemptMove(randomNumber);
     }
 
     public List<Car> judgeWinners(List<Car> cars) {
@@ -51,5 +50,26 @@ public class GameManager {
             }
         }
         return winners;
+    }
+
+    public void startGame() {
+        RacingView.printCarNameRequestMessage();
+        List<Car> cars = setParticipateCars();
+
+        RacingView.printAttemptNumberRequestMessage();
+        int attemptNumber = setAttemptNumber();
+
+        RacingView.printLineBreak();
+
+        for (int i = 0; i < attemptNumber; i++) {
+            for (Car car : cars) {
+                attemptMoveCars(car);
+                RacingView.printCarPosition(car);
+            }
+            RacingView.printLineBreak();
+        }
+
+        List<Car> winners = judgeWinners(cars);
+        RacingView.printWinners(winners);
     }
 }
