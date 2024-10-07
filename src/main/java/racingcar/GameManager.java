@@ -8,6 +8,7 @@ import racingcar.entity.Car;
 import racingcar.util.RandomNumberGenerator;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
+import racingcar.view.RacingView;
 
 public class GameManager {
     private static final String CAR_NAME_SPLIT_STANDARD = ",";
@@ -35,6 +36,12 @@ public class GameManager {
         for (Car car : cars) {
             int randomNumber = RandomNumberGenerator.randomNumberGenerate();
             car.attemptMove(randomNumber);
+        }
+    }
+
+    public void getAttemptResult() {
+        for (Car car : cars) {
+            RacingView.printCarPosition(car);
         }
     }
 }
