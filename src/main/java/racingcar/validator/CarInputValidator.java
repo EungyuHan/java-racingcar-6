@@ -3,6 +3,7 @@ package racingcar.validator;
 import java.util.HashSet;
 import java.util.Set;
 import racingcar.config.GameConstant;
+import racingcar.entity.Car;
 
 public class CarInputValidator {
     public static final String DUPLICATE_CAR_NAME_MESSAGE = "같은 이름을 가진 자동차가 있습니다.";

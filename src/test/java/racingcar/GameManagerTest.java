@@ -61,7 +61,7 @@ class GameManagerTest {
 
     @Test
     void 비어있는_이름_입력() {
-        String testString = ",car1,car2";
+        String testString = "car1,,car2";
         System.setIn(generateUserInput(testString));
 
         assertThatThrownBy(GameManager::setParticipateCars)
