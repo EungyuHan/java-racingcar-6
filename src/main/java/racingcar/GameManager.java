@@ -9,6 +9,7 @@ import racingcar.validator.CarInputValidator;
 
 public class GameManager {
     public static final String CAR_NAME_SPLIT_STANDARD = ",";
+    private List<Car> cars;
 
     public List<Car> setParticipateCars() {
         String participateCarString = readLine();
@@ -26,5 +27,12 @@ public class GameManager {
         String attemptsNumberString = readLine();
         AttemptInputValidator.attemptInputValidate(attemptsNumberString);
         return Integer.parseInt(attemptsNumberString);
+    }
+
+    public void attemptMoveCars() {
+        for (Car car : cars) {
+            int randomNumber = RandomNumberGenerator.randomNumberGenerate();
+            car.attemptMove(randomNumber);
+        }
     }
 }
