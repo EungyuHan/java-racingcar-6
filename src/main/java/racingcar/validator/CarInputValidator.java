@@ -2,9 +2,9 @@ package racingcar.validator;
 
 import java.util.HashSet;
 import java.util.Set;
+import racingcar.config.GameConstant;
 
 public class CarInputValidator {
-    public static final int ALLOWED_NAME_LENGTH = 5;
     public static final String DUPLICATE_CAR_NAME_MESSAGE = "같은 이름을 가진 자동차가 있습니다.";
     public static final String LENGTH_EXCEED_MESSAGE = "허용된 이름 길이를 초과했습니다.";
     public static final String EMPTY_NAME_MESSAGE = "이름을 1글자 이상 입력해주세요.";
@@ -30,7 +30,7 @@ public class CarInputValidator {
 
     private static void checkAllowedLength(String[] testCarNames) {
         for (String s : testCarNames) {
-            if (s.length() > ALLOWED_NAME_LENGTH) {
+            if (s.length() > GameConstant.CAR_NAME_UPPER_BOUND) {
                 throw new IllegalArgumentException(LENGTH_EXCEED_MESSAGE);
             }
         }

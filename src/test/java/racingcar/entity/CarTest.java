@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import racingcar.config.GameTestConstant;
 
 class CarTest {
     Car car;
@@ -14,16 +15,14 @@ class CarTest {
 
     @Test
     void 자동차_전진_성공() {
-        int number = 4;
-        car.attemptMove(number);
+        car.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
         assertThat(car.getPosition()).isEqualTo(1);
     }
 
     @Test
     void 자동차_전진_실패() {
-        int number = 3;
-        car.attemptMove(number);
+        car.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
 
         assertThat(car.getPosition()).isZero();
     }

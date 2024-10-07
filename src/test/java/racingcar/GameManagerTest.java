@@ -9,13 +9,12 @@ import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import racingcar.config.GameTestConstant;
 import racingcar.entity.Car;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 class GameManagerTest {
-    static final int MOVING_FORWARD = 5;
-    static final int STOP = 3;
     static GameManager gameManager = new GameManager();
 
     private static InputStream generateUserInput(String input) {
@@ -114,10 +113,10 @@ class GameManagerTest {
     @Test
     void 우승자_판정_단일우승() {
         Car car1 = new Car("winner");
-        car1.attemptMove(MOVING_FORWARD);
+        car1.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
         Car car2 = new Car("loser");
-        car2.attemptMove(STOP);
+        car2.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
 
         List<Car> cars = List.of(car1, car2);
 
@@ -129,10 +128,10 @@ class GameManagerTest {
     @Test
     void 우승자_판정_2명이상() {
         Car car1 = new Car("winner1");
-        car1.attemptMove(MOVING_FORWARD);
+        car1.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
         Car car2 = new Car("winner2");
-        car2.attemptMove(MOVING_FORWARD);
+        car2.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
         List<Car> cars = List.of(car1, car2);
 

@@ -1,7 +1,8 @@
 package racingcar.entity;
 
+import racingcar.config.GameConstant;
+
 public class Car {
-    private static final int MOVE_CRITERIA = 4;
     private final String carName;
     private int position;
 
@@ -11,7 +12,7 @@ public class Car {
     }
 
     public void attemptMove(int randomNumber) {
-        if (randomNumber >= MOVE_CRITERIA) {
+        if (randomNumber >= GameConstant.MOVING_LOWER_BOUND) {
             position++;
         }
     }

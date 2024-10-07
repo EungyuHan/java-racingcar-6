@@ -8,12 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import racingcar.config.GameTestConstant;
 import racingcar.entity.Car;
 
 class RacingViewTest {
     static ByteArrayOutputStream outputStreamCaptor;
-    static final int MOVING_FORWARD = 5;
-    static final int STOP = 3;
     Car car;
 
     @BeforeEach
@@ -30,7 +29,7 @@ class RacingViewTest {
 
     @Test
     void 전진_성공_결과_출력() {
-        car.attemptMove(MOVING_FORWARD);
+        car.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
         RacingView.printCarPosition(car);
         assertEquals("car : -\n", outputStreamCaptor.toString());
@@ -38,7 +37,7 @@ class RacingViewTest {
 
     @Test
     void 전진_실패_결과_출력() {
-        car.attemptMove(STOP);
+        car.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
 
         RacingView.printCarPosition(car);
         assertEquals("car : \n", outputStreamCaptor.toString());
