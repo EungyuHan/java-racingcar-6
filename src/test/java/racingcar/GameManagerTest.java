@@ -14,6 +14,8 @@ import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 class GameManagerTest {
+    static final int MOVING_FORWARD = 5;
+    static final int STOP = 3;
     static GameManager gameManager = new GameManager();
 
     private static InputStream generateUserInput(String input) {
@@ -107,5 +109,35 @@ class GameManagerTest {
         assertThatThrownBy(() -> gameManager.setAttemptNumber())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NON_NUMERIC_MESSAGE);
+    }
+
+    @Test
+    void 우승자_판정_단일우승() {
+        Car car1 = new Car("winner");
+        car1.attemptMove(MOVING_FORWARD);
+
+        Car car2 = new Car("loser");
+        car2.attemptMove(STOP);
+
+        List<Car> cars = List.of(car1, car2);
+
+        List<Car> winners = gameManager.judgeWinners(cars);
+
+        assertThat(winners).containsOnly(car1);
+    }
+
+    @Test
+    void 우승자_판정_2명이상() {
+        Car car1 = new Car("winner1");
+        car1.attemptMove(MOVING_FORWARD);
+
+        Car car2 = new Car("winner2");
+        car2.attemptMove(MOVING_FORWARD);
+
+        List<Car> cars = List.of(car1, car2);
+
+        List<Car> winners = gameManager.judgeWinners(cars);
+
+        assertThat(winners).containsOnly(car1, car2);
     }
 }

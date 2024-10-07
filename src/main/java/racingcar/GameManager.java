@@ -36,4 +36,20 @@ public class GameManager {
             car.attemptMove(randomNumber);
         }
     }
+
+    public List<Car> judgeWinners(List<Car> cars) {
+        int longest = 0;
+        List<Car> winners = new ArrayList<>();
+        for (Car car : cars) {
+            if (longest < car.getPosition()) {
+                longest = car.getPosition();
+            }
+        }
+        for (Car car : cars) {
+            if (longest == car.getPosition()) {
+                winners.add(car);
+            }
+        }
+        return winners;
+    }
 }
