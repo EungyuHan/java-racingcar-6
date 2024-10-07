@@ -8,7 +8,7 @@ import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 public class GameManager {
-    public static final String CAR_NAME_SPLIT_STANDARD = ",";
+    private static final String CAR_NAME_SPLIT_STANDARD = ",";
     private List<Car> cars;
 
     public List<Car> setParticipateCars() {
