@@ -7,24 +7,23 @@ public class AttemptInputValidator {
     private AttemptInputValidator() {
     }
 
-    public static void attemptInputValidate(String attemptString) {
-        int attemptNumber = checkNonNumericAttempt(attemptString);
-        checkNegativeAttempt(attemptNumber);
+    public static void validateAttemptInput(String attemptString) {
+        validateNumericinput(attemptString);
+        validatePositiveInput(attemptString);
     }
 
-    private static void checkNegativeAttempt(int attemptNumber) {
+    private static void validatePositiveInput(String attemptString) {
+        int attemptNumber = Integer.parseInt(attemptString);
         if (attemptNumber <= 0) {
             throw new IllegalArgumentException(NEGATIVE_ATTEMPT_MESSAGE);
         }
     }
 
-    private static int checkNonNumericAttempt(String testString) {
-        int attemptNumber;
+    private static void validateNumericinput(String testString) {
         try {
-            attemptNumber = Integer.parseInt(testString);
+            Integer.parseInt(testString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NON_NUMERIC_MESSAGE);
         }
-        return attemptNumber;
     }
 }

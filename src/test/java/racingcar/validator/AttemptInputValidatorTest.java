@@ -8,7 +8,7 @@ class AttemptInputValidatorTest {
     @Test
     void 음수_혹은_0_입력() {
         String testString = "-1";
-        assertThatThrownBy(() -> AttemptInputValidator.attemptInputValidate(testString))
+        assertThatThrownBy(() -> AttemptInputValidator.validateAttemptInput(testString))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NEGATIVE_ATTEMPT_MESSAGE);
     }
@@ -17,7 +17,7 @@ class AttemptInputValidatorTest {
     void 숫자가_아닌_값_확인() {
         String testString = "a";
 
-        assertThatThrownBy(() -> AttemptInputValidator.attemptInputValidate(testString))
+        assertThatThrownBy(() -> AttemptInputValidator.validateAttemptInput(testString))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NON_NUMERIC_MESSAGE);
     }

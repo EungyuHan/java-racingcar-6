@@ -19,7 +19,7 @@ public class GameManager {
     public static List<Car> setParticipateCars() {
         String participateCarString = readLine();
         String[] participateCarNameList = participateCarString.split(CAR_NAME_SPLIT_STANDARD);
-        CarInputValidator.carInputValidate(participateCarNameList);
+        CarInputValidator.validateCarInput(participateCarNameList);
 
         List<Car> carList = new ArrayList<>();
         for (String s : participateCarNameList) {
@@ -30,7 +30,7 @@ public class GameManager {
 
     public static int setAttemptNumber() {
         String attemptsNumberString = readLine();
-        AttemptInputValidator.attemptInputValidate(attemptsNumberString);
+        AttemptInputValidator.validateAttemptInput(attemptsNumberString);
         return Integer.parseInt(attemptsNumberString);
     }
 

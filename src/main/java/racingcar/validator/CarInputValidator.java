@@ -3,7 +3,6 @@ package racingcar.validator;
 import java.util.HashSet;
 import java.util.Set;
 import racingcar.config.GameConstant;
-import racingcar.entity.Car;
 
 public class CarInputValidator {
     public static final String DUPLICATE_CAR_NAME_MESSAGE = "같은 이름을 가진 자동차가 있습니다.";
@@ -13,13 +12,13 @@ public class CarInputValidator {
     private CarInputValidator() {
     }
 
-    public static void carInputValidate(String[] participateCarNameList) {
-        checkDuplicateCarName(participateCarNameList);
-        checkAllowedLength(participateCarNameList);
-        checkEmptyName(participateCarNameList);
+    public static void validateCarInput(String[] participateCarNameList) {
+        validateIndependentCarNameInput(participateCarNameList);
+        validateAllowedLengthInput(participateCarNameList);
+        validateNonEmptyNameInput(participateCarNameList);
     }
 
-    private static void checkDuplicateCarName(String[] participateCarNameList) {
+    private static void validateIndependentCarNameInput(String[] participateCarNameList) {
         Set<String> carNameSet = new HashSet<>();
         for (String carName : participateCarNameList) {
             if (carNameSet.contains(carName)) {
@@ -29,7 +28,7 @@ public class CarInputValidator {
         }
     }
 
-    private static void checkAllowedLength(String[] testCarNames) {
+    private static void validateAllowedLengthInput(String[] testCarNames) {
         for (String s : testCarNames) {
             if (s.length() > GameConstant.CAR_NAME_UPPER_BOUND) {
                 throw new IllegalArgumentException(LENGTH_EXCEED_MESSAGE);
@@ -37,7 +36,7 @@ public class CarInputValidator {
         }
     }
 
-    private static void checkEmptyName(String[] testCarNames) {
+    private static void validateNonEmptyNameInput(String[] testCarNames) {
         for (String s : testCarNames) {
             String deleteWhiteSpaceString = s.replace(" ", "");
             if (deleteWhiteSpaceString.isEmpty()) {
