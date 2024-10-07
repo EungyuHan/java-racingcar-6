@@ -12,7 +12,6 @@ import racingcar.view.RacingView;
 
 public class GameManager {
     private static final String CAR_NAME_SPLIT_STANDARD = ",";
-    private List<Car> cars;
 
     public List<Car> setParticipateCars() {
         String participateCarString = readLine();
@@ -32,14 +31,15 @@ public class GameManager {
         return Integer.parseInt(attemptsNumberString);
     }
 
-    public void attemptMoveCars() {
+    public void attemptMoveCars(List<Car> cars) {
         for (Car car : cars) {
             int randomNumber = RandomNumberGenerator.randomNumberGenerate();
             car.attemptMove(randomNumber);
         }
+        System.out.println();
     }
 
-    public void getAttemptResult() {
+    public void getAttemptResult(List<Car> cars) {
         for (Car car : cars) {
             RacingView.printCarPosition(car);
         }
