@@ -11,7 +11,7 @@ public class Car {
         this.position = 0;
     }
 
-    public void attemptMove(int randomNumber) {
+    public void moveCar(int randomNumber) {
         if (randomNumber >= GameConstant.MOVING_LOWER_BOUND) {
             position++;
         }

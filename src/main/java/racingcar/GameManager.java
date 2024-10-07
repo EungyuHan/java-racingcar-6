@@ -33,7 +33,7 @@ public class GameManager {
         for (int i = 0; i < attemptNumber; i++) {
             for (Car car : cars) {
                 int randomNumber = RandomNumberGenerator.randomNumberGenerate();
-                car.attemptMove(randomNumber);
+                car.moveCar(randomNumber);
                 OutputView.printCarPosition(car);
             }
             OutputView.printLineBreak();

@@ -12,10 +12,10 @@ class GameManagerTest {
     @Test
     void 우승자_판정_단일우승() {
         Car car1 = new Car("winner");
-        car1.attemptMove(GameTestConstant.MOVABLE_NUMBER);
+        car1.moveCar(GameTestConstant.MOVABLE_NUMBER);
 
         Car car2 = new Car("loser");
-        car2.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
+        car2.moveCar(GameTestConstant.IMMOAVBLE_NUMBER);
 
         List<Car> cars = List.of(car1, car2);
 
@@ -27,10 +27,10 @@ class GameManagerTest {
     @Test
     void 우승자_판정_2명이상() {
         Car car1 = new Car("winner1");
-        car1.attemptMove(GameTestConstant.MOVABLE_NUMBER);
+        car1.moveCar(GameTestConstant.MOVABLE_NUMBER);
 
         Car car2 = new Car("winner2");
-        car2.attemptMove(GameTestConstant.MOVABLE_NUMBER);
+        car2.moveCar(GameTestConstant.MOVABLE_NUMBER);
 
         List<Car> cars = List.of(car1, car2);
 

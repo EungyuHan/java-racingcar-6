@@ -15,14 +15,14 @@ class CarTest {
 
     @Test
     void 자동차_전진_성공() {
-        car.attemptMove(GameTestConstant.MOVABLE_NUMBER);
+        car.moveCar(GameTestConstant.MOVABLE_NUMBER);
 
         assertThat(car.getPosition()).isEqualTo(1);
     }
 
     @Test
     void 자동차_전진_실패() {
-        car.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
+        car.moveCar(GameTestConstant.IMMOAVBLE_NUMBER);
 
         assertThat(car.getPosition()).isZero();
     }

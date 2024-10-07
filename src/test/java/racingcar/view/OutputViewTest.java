@@ -29,7 +29,7 @@ class OutputViewTest {
 
     @Test
     void 전진_성공_결과_출력() {
-        car.attemptMove(GameTestConstant.MOVABLE_NUMBER);
+        car.moveCar(GameTestConstant.MOVABLE_NUMBER);
 
         OutputView.printCarPosition(car);
         assertEquals("car : -\n", outputStreamCaptor.toString());
@@ -37,7 +37,7 @@ class OutputViewTest {
 
     @Test
     void 전진_실패_결과_출력() {
-        car.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
+        car.moveCar(GameTestConstant.IMMOAVBLE_NUMBER);
 
         OutputView.printCarPosition(car);
         assertEquals("car : \n", outputStreamCaptor.toString());
