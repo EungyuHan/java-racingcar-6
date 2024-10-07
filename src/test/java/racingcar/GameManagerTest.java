@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import racingcar.entity.Car;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 

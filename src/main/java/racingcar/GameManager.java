@@ -4,6 +4,8 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.ArrayList;
 import java.util.List;
+import racingcar.entity.Car;
+import racingcar.util.RandomNumberGenerator;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
