@@ -97,4 +97,14 @@ class GameManagerTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NEGATIVE_ATTEMPT_MESSAGE);
     }
+
+    @Test
+    void 숫자가_아닌_값_시도횟수_입력() {
+        String testString = "a";
+        System.setIn(generateUserInput(testString));
+
+        assertThatThrownBy(() -> gameManager.setAttemptNumber())
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(AttemptInputValidator.NON_NUMERIC_MESSAGE);
+    }
 }

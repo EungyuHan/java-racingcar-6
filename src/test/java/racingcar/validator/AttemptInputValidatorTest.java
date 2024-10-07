@@ -12,4 +12,13 @@ class AttemptInputValidatorTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NEGATIVE_ATTEMPT_MESSAGE);
     }
+
+    @Test
+    void 숫자가_아닌_값_확인() {
+        String testString = "a";
+
+        assertThatThrownBy(() -> AttemptInputValidator.attemptInputValidate(testString))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(AttemptInputValidator.NON_NUMERIC_MESSAGE);
+    }
 }
