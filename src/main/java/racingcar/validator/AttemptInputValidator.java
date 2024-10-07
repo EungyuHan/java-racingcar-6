@@ -8,23 +8,23 @@ public class AttemptInputValidator {
     }
 
     public static void attemptInputValidate(String attemptString) {
-        checkNonNumericAttempt(attemptString);
-        checkNegativeAttempt(attemptString);
+        int attemptNumber = checkNonNumericAttempt(attemptString);
+        checkNegativeAttempt(attemptNumber);
     }
 
-    private static void checkNegativeAttempt(String testString) {
-        int attemptNumber = Integer.parseInt(testString);
+    private static void checkNegativeAttempt(int attemptNumber) {
         if (attemptNumber <= 0) {
             throw new IllegalArgumentException(NEGATIVE_ATTEMPT_MESSAGE);
         }
     }
 
-    private static void checkNonNumericAttempt(String testString) {
-        for (int i = 0; i < testString.length(); i++) {
-            char c = testString.charAt(i);
-            if (c < '0' || c > '9') {
-                throw new IllegalArgumentException(NON_NUMERIC_MESSAGE);
-            }
+    private static int checkNonNumericAttempt(String testString) {
+        int attemptNumber;
+        try {
+            attemptNumber = Integer.parseInt(testString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NON_NUMERIC_MESSAGE);
         }
+        return attemptNumber;
     }
 }
