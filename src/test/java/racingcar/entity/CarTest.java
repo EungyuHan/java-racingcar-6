@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class CarTest {
     Car car;
-    // Car static 멤버 접근을 위한 변수
-    public static final String CAR_POSITION = "position";
-
     @BeforeEach
     void setUp() {
         car = new Car("car");
@@ -20,7 +17,7 @@ class CarTest {
         int number = 4;
         car.attemptMove(number);
 
-        assertThat(car).extracting(CAR_POSITION).isEqualTo(1);
+        assertThat(car.getPosition()).isEqualTo(1);
     }
 
     @Test
@@ -28,6 +25,6 @@ class CarTest {
         int number = 3;
         car.attemptMove(number);
 
-        assertThat(car).extracting(CAR_POSITION).isEqualTo(0);
+        assertThat(car.getPosition()).isZero();
     }
 }
