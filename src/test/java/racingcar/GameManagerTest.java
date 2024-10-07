@@ -15,7 +15,6 @@ import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
 
 class GameManagerTest {
-    static GameManager gameManager = new GameManager();
 
     private static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes());
@@ -32,7 +31,7 @@ class GameManagerTest {
         String[] resultString = {"car1", "car2", "car3"};
         System.setIn(generateUserInput(testString));
 
-        List<Car> cars = gameManager.setParticipateCars();
+        List<Car> cars = GameManager.setParticipateCars();
 
         assertThat(cars).hasSize(resultString.length);
         for (int i = 0; i < cars.size(); i++) {
@@ -45,7 +44,7 @@ class GameManagerTest {
         String testString = "car1,car2,car1";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(GameManager::setParticipateCars)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CarInputValidator.DUPLICATE_CAR_NAME_MESSAGE);
     }
@@ -55,7 +54,7 @@ class GameManagerTest {
         String testString = "car1,car22,car333";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(GameManager::setParticipateCars)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CarInputValidator.LENGTH_EXCEED_MESSAGE);
     }
@@ -65,7 +64,7 @@ class GameManagerTest {
         String testString = ",car1,car2";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(GameManager::setParticipateCars)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CarInputValidator.EMPTY_NAME_MESSAGE);
     }
@@ -75,7 +74,7 @@ class GameManagerTest {
         String testString = "car1,  ,car2";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setParticipateCars())
+        assertThatThrownBy(GameManager::setParticipateCars)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CarInputValidator.EMPTY_NAME_MESSAGE);
     }
@@ -86,7 +85,7 @@ class GameManagerTest {
         int expected = Integer.parseInt(testString);
         System.setIn(generateUserInput(testString));
 
-        int attemptNumber = gameManager.setAttemptNumber();
+        int attemptNumber = GameManager.setAttemptNumber();
         assertThat(attemptNumber).isEqualTo(expected);
     }
 
@@ -95,7 +94,7 @@ class GameManagerTest {
         String testString = "-1";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setAttemptNumber())
+        assertThatThrownBy(GameManager::setAttemptNumber)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NEGATIVE_ATTEMPT_MESSAGE);
     }
@@ -105,7 +104,7 @@ class GameManagerTest {
         String testString = "a";
         System.setIn(generateUserInput(testString));
 
-        assertThatThrownBy(() -> gameManager.setAttemptNumber())
+        assertThatThrownBy(GameManager::setAttemptNumber)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(AttemptInputValidator.NON_NUMERIC_MESSAGE);
     }
@@ -120,7 +119,7 @@ class GameManagerTest {
 
         List<Car> cars = List.of(car1, car2);
 
-        List<Car> winners = gameManager.judgeWinners(cars);
+        List<Car> winners = GameManager.judgeWinners(cars);
 
         assertThat(winners).containsOnly(car1);
     }
@@ -135,7 +134,7 @@ class GameManagerTest {
 
         List<Car> cars = List.of(car1, car2);
 
-        List<Car> winners = gameManager.judgeWinners(cars);
+        List<Car> winners = GameManager.judgeWinners(cars);
 
         assertThat(winners).containsOnly(car1, car2);
     }
