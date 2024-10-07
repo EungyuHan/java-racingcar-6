@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import racingcar.config.GameTestConstant;
 import racingcar.entity.Car;
 
-class RacingViewTest {
+class OutputViewTest {
     static ByteArrayOutputStream outputStreamCaptor;
     Car car;
 
@@ -31,7 +31,7 @@ class RacingViewTest {
     void 전진_성공_결과_출력() {
         car.attemptMove(GameTestConstant.MOVABLE_NUMBER);
 
-        RacingView.printCarPosition(car);
+        OutputView.printCarPosition(car);
         assertEquals("car : -\n", outputStreamCaptor.toString());
     }
 
@@ -39,7 +39,7 @@ class RacingViewTest {
     void 전진_실패_결과_출력() {
         car.attemptMove(GameTestConstant.IMMOAVBLE_NUMBER);
 
-        RacingView.printCarPosition(car);
+        OutputView.printCarPosition(car);
         assertEquals("car : \n", outputStreamCaptor.toString());
     }
 
@@ -47,11 +47,11 @@ class RacingViewTest {
     void 단일_우승자_출력() {
         Car winnerCar = new Car("winner");
         List<Car> winner = List.of(winnerCar);
-        String expectedString = RacingView.WINNER_NOTIFICATION_MESSAGE
+        String expectedString = OutputView.WINNER_NOTIFICATION_MESSAGE
                 + winnerCar.getCarName()
                 + "\n";
 
-        RacingView.printWinners(winner);
+        OutputView.printWinners(winner);
 
         assertEquals(expectedString, outputStreamCaptor.toString());
     }
@@ -62,13 +62,13 @@ class RacingViewTest {
         Car winnerCar2 = new Car("winner2");
         List<Car> winners = List.of(winnerCar1, winnerCar2);
 
-        String expectedString = RacingView.WINNER_NOTIFICATION_MESSAGE
+        String expectedString = OutputView.WINNER_NOTIFICATION_MESSAGE
                 + winnerCar1.getCarName()
                 + ", "
                 + winnerCar2.getCarName()
                 + "\n";
 
-        RacingView.printWinners(winners);
+        OutputView.printWinners(winners);
 
         assertEquals(expectedString, outputStreamCaptor.toString());
     }

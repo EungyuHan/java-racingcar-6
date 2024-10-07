@@ -8,7 +8,7 @@ import racingcar.entity.Car;
 import racingcar.util.RandomNumberGenerator;
 import racingcar.validator.AttemptInputValidator;
 import racingcar.validator.CarInputValidator;
-import racingcar.view.RacingView;
+import racingcar.view.OutputView;
 
 public class GameManager {
     private static final String CAR_NAME_SPLIT_STANDARD = ",";
@@ -56,23 +56,23 @@ public class GameManager {
     }
 
     public static void startGame() {
-        RacingView.printCarNameRequestMessage();
+        OutputView.printCarNameRequestMessage();
         List<Car> cars = setParticipateCars();
 
-        RacingView.printAttemptNumberRequestMessage();
+        OutputView.printAttemptNumberRequestMessage();
         int attemptNumber = setAttemptNumber();
 
-        RacingView.printLineBreak();
+        OutputView.printLineBreak();
 
         for (int i = 0; i < attemptNumber; i++) {
             for (Car car : cars) {
                 attemptMoveCars(car);
-                RacingView.printCarPosition(car);
+                OutputView.printCarPosition(car);
             }
-            RacingView.printLineBreak();
+            OutputView.printLineBreak();
         }
 
         List<Car> winners = judgeWinners(cars);
-        RacingView.printWinners(winners);
+        OutputView.printWinners(winners);
     }
 }
